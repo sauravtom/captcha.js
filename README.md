@@ -1,2 +1,4 @@
-test-client-side-captcha
+client-side-captcha
 ========================
+
+A client side captcha written in javascript.
