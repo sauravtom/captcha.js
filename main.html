@@ -6,7 +6,7 @@
 
 <div align="center"><br><br><br><br>
 	<canvas id ="draw" width="400" height="200" align='center'></canvas><br><br>
-	<input type="text" id="input" size="1" value="0000"></input>
+	<input type="text" id="input" size="10" placeholder="Enter the captcha"></input>
 	<button onclick="validate()">Validate</button>
 </div>
 
@@ -29,7 +29,7 @@
 		var x = 300;
 		var y = 50;
 		//console.debug(parseInt(n/100),s);
-		
+
 		while(parseInt(n/10) > 0){
 			draw_integer(n%10,random(40,150),x,y,plot0);
 			//console.debug(n,n%10);
@@ -42,7 +42,7 @@
 		distort();
 
 	}
-	
+
 //-------------------------------------------Draws border------------------------------------//
 
 	function border(plotx){
@@ -53,7 +53,7 @@
 		plotx.lineTo(0,0);
 		plotx.stroke();
 	}
-	
+
 //-------------------------------------------Draws single integer-------------------------//
 
 	function draw_integer(n,s,x,y,plotx){
@@ -166,7 +166,7 @@
 
 	}
 
-	
+
 //----------------------------------distortion--------------------------------------//
 
 	function distort() {
@@ -178,9 +178,9 @@
 		plot0.stroke();
 		}	
 	}
-	
+
 //-----------------------------------------------------------------------------------//
-	
+
 </script>
 
 </body>
