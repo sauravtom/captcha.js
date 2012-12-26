@@ -1,0 +1,187 @@
+<html>
+  <head>
+  	<title>Captcha</title>
+	</head>
+<body onload='drawnum()'>
+
+<div align="center"><br><br><br><br>
+	<canvas id ="draw" width="400" height="200" align='center'></canvas><br><br>
+	<input type="text" id="input" size="10" placeholder="Enter the captcha"></input>
+	<button onclick="validate()">Validate</button>
+</div>
+
+
+<script type="text/javascript">
+
+	function $(id) { return document.getElementById(id) } 	
+
+	function random(i,j){ return Math.round(Math.random()*(j-i-1)) + i }  //returns a random number between i and j
+
+//-------------------------------------------------------------------------------------------//
+
+	var rnum = random(1000,9999);  //to give global scope to variable n
+	var plot0  = $('draw').getContext('2d');
+
+	function drawnum() {
+
+		var n = rnum;
+		var s = 100;
+		var x = 300;
+		var y = 50;
+		//console.debug(parseInt(n/100),s);
+
+		while(parseInt(n/10) > 0){
+			draw_integer(n%10,random(40,150),x,y,plot0);
+			//console.debug(n,n%10);
+			n=parseInt(n/10);
+			x=x-4*s/5;
+		}
+		draw_integer(n,s,x,y,plot0);		
+		//console.debug(n,n%10);
+		border(plot0);
+		distort();
+
+	}
+
+//-------------------------------------------Draws border------------------------------------//
+
+	function border(plotx){
+		plotx.moveTo(0,0);
+		plotx.lineTo(400,0);
+		plotx.lineTo(400,200);
+		plotx.lineTo(0,200);
+		plotx.lineTo(0,0);
+		plotx.stroke();
+	}
+
+//-------------------------------------------Draws single integer-------------------------//
+
+	function draw_integer(n,s,x,y,plotx){
+		switch(n){
+			case 1:{plotx.moveTo(x,y);
+					plotx.lineTo(x,y+s);
+					plotx.lineTo(x+s/10,y+s);
+					plotx.lineTo(x-s/10,y+s);
+					plotx.moveTo(x,y);
+					plotx.lineTo(x-s/10,y+s/10);
+					plotx.stroke();
+					break;					
+					}
+			case 2:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x,y+s/2);
+					plotx.lineTo(x,y+s);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.stroke();
+					break;
+					}
+			case 3:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x,y+s/2);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.lineTo(x,y+s);
+					plotx.stroke();
+					break;
+					}
+			case 4:{plotx.moveTo(x,y);
+					plotx.lineTo(x,y+s/2);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.stroke();
+					break;
+					}
+			case 5:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x,y);
+					plotx.lineTo(x,y+s/2);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.lineTo(x,y+s);
+					plotx.stroke();
+					break;
+					}
+			case 6:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x,y);
+					plotx.lineTo(x,y+s);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x,y+s/2);
+					plotx.stroke();
+					break;
+					}
+			case 7:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.moveTo(x+s/2-s/4,y+s/2);
+					plotx.lineTo(x+s/2+s/16,y+s/2);
+					plotx.stroke();
+					break;
+					}
+			case 8:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x,y);
+					plotx.lineTo(x,y+s);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x,y+s/2);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x+s/2,y);
+					plotx.stroke();
+					break;
+					}
+			case 9:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x,y);
+					plotx.lineTo(x,y+s/2);
+					plotx.moveTo(x,y+s);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x,y+s/2);
+					plotx.lineTo(x+s/2,y+s/2);
+					plotx.lineTo(x+s/2,y);
+					plotx.stroke();
+					break;
+					}
+			case 0:{plotx.moveTo(x,y);
+					plotx.lineTo(x+s/2,y);
+					plotx.lineTo(x+s/2,y+s);
+					plotx.lineTo(x,y+s);
+					plotx.lineTo(x,y);
+					plotx.stroke();
+					break;
+					}
+			}
+	}
+
+//----------------------------------validation-------------------------------------//
+
+	function validate(){
+		if( parseInt($('input').value, 10) == rnum){window.alert('yes')}
+		else{window.alert('no')}
+
+	}
+
+
+//----------------------------------distortion--------------------------------------//
+
+	function distort() {
+	plot0.beginPath();
+		variable = random(10,15);
+	for(i=1;i<variable;i++){
+		plot0.moveTo(random(0,400),random(0,400));
+		plot0.lineTo(random(0,400),random(0,400));
+		plot0.stroke();
+		}	
+	}
+
+//-----------------------------------------------------------------------------------//
+
+</script>
+
+</body>
+</html>
